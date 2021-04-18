@@ -3,15 +3,21 @@
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav">
-        <li class="nav-item active">
+    <div class="collapse navbar-collapse" id="navbarNav" style="position:relative;">
+      <ul class="navbar-nav" style="position: absolute;right: 0;">
+        <li class="nav-item <%if (active === 'home') { %>
+            active
+            <% } %>">
           <a class="nav-link" href="/">Home </a>
         </li>
-        <li class="nav-item ">
+        <li class="nav-item <%if (active === 'feed') { %>
+            active
+            <% } %>">
           <a class="nav-link" href="/feed">My Feed <span class="sr-only">(current)</span></a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item <%if (active === 'connection') { %>
+            active
+            <% } %>">
           <a class="nav-link" href="/connection">Connections</a>
         </li>
         <!-- <li class="nav-item">
@@ -19,5 +25,6 @@
           </li>
         -->
       </ul>
+    
     </div>
   </nav>

@@ -4,6 +4,7 @@ const bodyParser = require('body-parser')
 const fileUpload = require('express-fileupload')
 const fs = require('fs')
 const JSONdb = require('simple-json-db');
+const { post } = require('ipfs-utils/src/http')
 const db = new JSONdb('./database.json');
 
 const ipfs = new ipfsClient({host:'localhost',port:'5001',protocol:'http'})
@@ -13,9 +14,52 @@ app.set('view engine','ejs')
 app.use(bodyParser.urlencoded({extended:true}))
 app.use(fileUpload())
 
+
+
+function getRandomInt(max) {
+    return Math.floor(Math.random() * max);
+  }
+
+let posts = [];
+
+    // for(var i=0;i<5;i++){
+    //     posts.push({
+    //         title:"Title"+i,
+    //         text:"this is a test article"
+    //     })
+    // }
+
+    posts.push({
+        views:getRandomInt(1000),
+        title:"Guillermo Lasso",
+        text:"Guillermo Alberto Santiago Lasso Mendoza born 16 November 1955) is an Ecuadorian businessman and politician who is the president-elect of Ecuador."
+    })
+
+    posts.push({
+        views:getRandomInt(1000),
+        title:"Hideki Matsuyama",
+        text:"Hideki Matsuyama is a Japanese professional golfer who plays on the PGA Tour. He is the first-ever Japanese professional golfer to win a men's major golf championship – the 2021 Masters Tournament."
+    })
+
+    posts.push({
+        views:getRandomInt(1000),
+        title:"Minella Times",
+        text:"Minella Times (foaled 4 March 2013) is an Irish-bred Thoroughbred racehorse who competes in National Hunt racing. In 2021, he won the Grand National under Rachael Blackmore, becoming the first horse ridden by a female jockey to win the race."
+    })
+
+    posts.push({
+        views:getRandomInt(1000),
+        title:"2021 Myanmar protests",
+        text:"Protests in Myanmar, known locally as the Spring Revolution, began in early 2021 in opposition to the coup d'état on 1 February, staged by Min Aung Hlaing, the commander-in-chief of the country's armed forces, the Tatmadaw. As of 16 April 2021, at least 728 protesters and bystanders, of which at least 44 were children, have been killed by military or police forces and at least 3,141 people detained."
+    })
+
+
 app.get('/',(req,res)=>{
     // db.set('test', 'name');
-    res.render('home')
+    
+    
+
+    res.render('home',{posts:posts})
 })
 
 app.get('/save',(req,res)=>{
@@ -51,7 +95,8 @@ app.post('/upload',(req,res)=>{
 })
 
 app.get('/feed',(req,res)=>{
-    res.render('feed')
+    
+    res.render('feed',{posts:posts})
     
 })
 
